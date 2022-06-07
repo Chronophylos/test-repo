@@ -1,0 +1,18 @@
+name: With Artifact
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Artifact
+        run: head -c 1M </dev/urandom > artifact
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-${{ github.ref }}
+          path: artifact
